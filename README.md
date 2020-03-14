@@ -1,7 +1,7 @@
-#Text Based Battleships
-##This, is text based Battleships
+# Text Based Battleships
+## This, is text based Battleships
 
-##Premise
+## Premise
 If you've ever played the game "Battleships" before, then this is like that, but worse
 
 much, much worse.
