@@ -1,46 +1,63 @@
 #Text-Based Battleships
-#An ide
+#An idea
 import random
 board = ["A1", "A2","A3","A4","A5","B1","B2","B3","B4","B5","C1","C2","C3","C4","C5","D1","D2","D3","D4","D5","E1","E2","E3","E4","E5"]
 
+def bootDisplay(board):
+    print ("\033[2J")   #ANSI Clear Escape Sequence. May not run on all systems.
+    print ("\033[u")  
+    print("========================================")
+    print("========Welcome to Battleships!=========")
+    print("========================================\n\n")
+    print("The board:\n")
+    print("",board[0], board[1], board[2], board[3], board[4], "\n", board[5], board[6], board[7], board[8], board[9], "\n", board[10], board[11], board[12], board[13], board[14], "\n", board[15], board[16], board[17], board[18], board[19], "\n", board[20], board[21], board[22], board[23], board[24], "\n\n\n")
+
 def playshipPositionSelect(board):
-    for i in range(0,10):
-        inputPos = raw_input("Please input a ship position.\n> ")
-        if inputPos in board:
-            if inputPos not in playshipos:
+    x = 10
+    playshipos = [] * 10
+    for i in range(0,x):
+        inputPos = input("Please input a ship position.\n> ")
+        if inputPos not in playshipos:
+            if inputPos in board:
                 playshipos.append(inputPos)
-                print("Ship added to Board")
+                print("Ship added to Board\n")
             else:
-                print("You already have a ship there.")
+                print("Position not on board\n")
         else:
-            print("Position unavailable on board.")
+            print("You already have a ship there.\n")
+            x+=1
     return playshipos
 
 def aishipPositionSelect(board):
-    for i in range(0,10):
+    x = 10
+    aishipos = [] * 10
+    for i in range(0,x):
         inputNum = random.randint(0,25)
         inputPos = board[inputNum]
-        while inputPos not in playshipos:
+        if inputPos not in aishipos:
             aishipos.append(inputPos)
         else:
-            
+            x+=1
     return aishipos
-
-print("========================================")
-print("========Welcome to Battleships!=========")
-print("========================================")
+print("\033[s")
+bootDisplay(board)
 oneortwo = int(input("Would you like to play with one, or two players?\n> "))
 if oneortwo == 1:
     print("One player selected, ok")
     AI = True
     print("Player 1 please enter your ships starting positions.\n\n")
     player1shippos = playshipPositionSelect(board)
+    print("AI player, please select your ships starting positions.\n\n")
+    player2shippos = aishipPositionSelect(board)
 elif oneortwo == 2:
     print("Two player selected, ok")
     AI = False
     print("Player 1 please enter your ships starting positions.\n\n")
     player1shippos = playshipPositionSelect(board)
-    print("Plaeyer 2 please enter your ships starting positions.\n\n")
-    player2shippos = playshipPositionselect
+    print("Player 2 please enter your ships starting positions. Player 1, look away or something.\n\n")
+    player2shippos = playshipPositionSelect(board)
 else:
     oneortwo = int(input("Would you like to play with one or two players?(Enter 1 or 2)\n> "))
+
+bootDisplay(board)
+print("Player positions", player1shippos, "\n\nAI positions", player2shippos)
