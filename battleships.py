@@ -7,7 +7,7 @@ player2shippos = []
 
 def bootDisplay(board):
     print ("\033[2J")
-    print ("\033[u")  
+    print ("\033[u")
     print("========================================")
     print("========Welcome to Battleships!=========")
     print("========================================\n\n")
@@ -43,8 +43,35 @@ def aishipPositionSelect(board):
         else:
             x+=1
     return aishipos
-print("\033[s")
 
+def playerTurn(board, curPlayPos, otherPlayPos, curPlayShots, curPlayHits):
+    bootDisplay(board)
+    print("Player's Hit Data")
+    print("Position\tHit?")
+    for i in range(0,len(curPlayShots)):
+        print(curPlayShots[i], "\t", curPlayHits[i])
+    print("Player's Ships")
+    for i in range(0,len(curPlayPos)):
+        print(curPlayPos[i], "\n")
+    for i in range(0,x):
+        shotRound = input("Please enter your shot position.\n> ")
+        if shotRound in board:
+            if shotRound not in curPlayShots:
+                if shotRound in otherPlayPos:
+                    print("Hit!")
+                    curPlayShots.append(shotRound)
+                    curPlayHits.append(True)
+                else:
+                    print("Miss!")
+                    curPlayShots.append(shotRound)
+                    curPlayHits.append(False)
+            else:
+                print("You have already tried to hit that position.Try again.")
+        else:
+            print("Position isn't on the board.")
+    print("Your turn over.")
+
+print("\033[s")
 bootDisplay(board)
 oneortwo = int(input("Would you like to play with one, or two players?\n> "))
 if oneortwo == 1:
