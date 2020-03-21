@@ -4,6 +4,10 @@ import random
 board = ["A1", "A2","A3","A4","A5","B1","B2","B3","B4","B5","C1","C2","C3","C4","C5","D1","D2","D3","D4","D5","E1","E2","E3","E4","E5"]
 player1shippos = []
 player2shippos = []
+player1shots = []
+player1hits = []
+player2shots = []
+player2hits = []
 
 def bootDisplay(board):
     print ("\033[2J")
@@ -53,6 +57,7 @@ def playerTurn(board, curPlayPos, otherPlayPos, curPlayShots, curPlayHits):
     print("Player's Ships")
     for i in range(0,len(curPlayPos)):
         print(curPlayPos[i], "\n")
+    x=0
     for i in range(0,x):
         shotRound = input("Please enter your shot position.\n> ")
         if shotRound in board:
@@ -67,8 +72,10 @@ def playerTurn(board, curPlayPos, otherPlayPos, curPlayShots, curPlayHits):
                     curPlayHits.append(False)
             else:
                 print("You have already tried to hit that position.Try again.")
+                x+=1
         else:
             print("Position isn't on the board.")
+            x+=1
     print("Your turn over.")
 
 print("\033[s")
@@ -92,4 +99,6 @@ else:
     oneortwo = int(input("Would you like to play with one or two players?(Enter 1 or 2)\n> "))
 
 bootDisplay(board)
-print("Player positions", player1shippos, "\n\nAI/Player 2 positions", player2shippos)
+if oneortwo == 1:
+    print("Player's Turn")
+    playerTurn(board, player1shippos, player2shippos, player1shots, player1hits)
