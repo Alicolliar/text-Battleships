@@ -78,6 +78,14 @@ def playerTurn(board, curPlayPos, otherPlayPos, curPlayShots, curPlayHits):
             x+=1
     print("Your turn over.")
 
+def aiTurn(board, aiPos, playPos, aiShots, aiHits):
+    x=0
+    for i in range(0,x):
+        point = random.randint(0,25)
+        aiShot = board[point]
+        if aishot not in aiShots:
+            if 
+
 print("\033[s")
 bootDisplay(board)
 oneortwo = int(input("Would you like to play with one, or two players?\n> "))
