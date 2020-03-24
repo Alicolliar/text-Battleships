@@ -1,6 +1,7 @@
 #Text-Based Battleships
 #An idea
 import random
+import time
 board = ["A1", "A2","A3","A4","A5","B1","B2","B3","B4","B5","C1","C2","C3","C4","C5","D1","D2","D3","D4","D5","E1","E2","E3","E4","E5"]
 player1shippos = []
 player2shippos = []
@@ -65,8 +66,9 @@ def playerTurn(board, curPlayPos, otherPlayPos, curPlayShots, curPlayHits):
                 if shotRound in otherPlayPos:
                     print("Hit!")
                     curPlayShots.append(shotRound)
+                    otherPlayPos.pop(otherPlayPos.index(shotRound))
                     curPlayHits.append(True)
-                else:
+                else:                                                           #Illustrating that hoomans are stupid fucking twats since 14/03/2020 (Not the 3rd of February 2021, you stupid yanks)
                     print("Miss!")
                     curPlayShots.append(shotRound)
                     curPlayHits.append(False)
@@ -76,15 +78,30 @@ def playerTurn(board, curPlayPos, otherPlayPos, curPlayShots, curPlayHits):
         else:
             print("Position isn't on the board.")
             x+=1
-    print("Your turn over.")
+    print("Your turn is over.")
+    return otherPlayPos, curPlayshots, curPlayHits
 
-def aiTurn(board, aiPos, playPos, aiShots, aiHits):
+
+def aiTurn(board, playPos, aiShots, aiHits):
     x=0
+    bootDisplay()
     for i in range(0,x):
         point = random.randint(0,25)
         aiShot = board[point]
-        if aishot not in aiShots:
-            if 
+        if aishot not in aiShots:                                               #Illustrating that robots aren't infallible since 2130, 24/03/2020 (I don't think this one needs any explanation, really.)
+            if aiShot in playPos:
+                print("Hit! at", aiShot)
+                aiShots.append(aiShot)
+                playPos.pop(playPos.index(aiShot))
+                aiHits.append(True)
+                time.sleep(3)
+            else:
+                print("Miss! at", aiShot)
+                aiShots.append(aiShot)
+                aiHits.append(False)
+        else:
+            x+=1
+    return playPos, aishots, aiHits
 
 print("\033[s")
 bootDisplay(board)
@@ -109,4 +126,12 @@ else:
 bootDisplay(board)
 if oneortwo == 1:
     print("Player's Turn")
-    playerTurn(board, player1shippos, player2shippos, player1shots, player1hits)
+    player2shippos, player1shots, player1hits = playerTurn(board, player1shippos, player2shippos, player1shots, player1hits)
+    bootDisplay()
+    print("AI's Turn")
+    player1shippos, player2shots, player2hits = aiTurn(board, player1shippos, player2shots, player2hits)
+else:
+    print("Player 1's Turn")
+    player2shippos, player1shots, player1hits = playerTurn(board, player1shippos, player2shippos, player1shots, player1hits)
+    print("Player 2's Turn")
+    player1shippos, player2shots, player2hits = playerTurn(board, player2shippos, player1shippos, player2shots, player2hits)
