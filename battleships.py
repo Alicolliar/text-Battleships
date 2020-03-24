@@ -41,7 +41,7 @@ def aishipPositionSelect(board):
     x = 10
     aishipos = [] * 10
     for i in range(0,x):
-        inputNum = random.randint(0,25)
+        inputNum = random.randint(0,24)
         inputPos = board[inputNum]
         if inputPos not in aishipos:
             aishipos.append(inputPos)
