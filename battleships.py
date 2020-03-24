@@ -79,7 +79,7 @@ def playerTurn(board, curPlayPos, otherPlayPos, curPlayShots, curPlayHits):
             print("Position isn't on the board.")
             x+=1
     print("Your turn is over.")
-    return otherPlayPos, curPlayshots, curPlayHits
+    return otherPlayPos, curPlayShots, curPlayHits
 
 
 def aiTurn(board, playPos, aiShots, aiHits):
@@ -88,7 +88,7 @@ def aiTurn(board, playPos, aiShots, aiHits):
     for i in range(0,x):
         point = random.randint(0,25)
         aiShot = board[point]
-        if aishot not in aiShots:                                               #Illustrating that robots aren't infallible since 2130, 24/03/2020 (I don't think this one needs any explanation, really.)
+        if aiShot not in aiShots:                                               #Illustrating that robots aren't infallible since 2130, 24/03/2020 (I don't think this one needs any explanation, really.)
             if aiShot in playPos:
                 print("Hit! at", aiShot)
                 aiShots.append(aiShot)
@@ -101,7 +101,7 @@ def aiTurn(board, playPos, aiShots, aiHits):
                 aiHits.append(False)
         else:
             x+=1
-    return playPos, aishots, aiHits
+    return playPos, aiShots, aiHits
 
 print("\033[s")
 bootDisplay(board)
