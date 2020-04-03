@@ -84,7 +84,7 @@ def playerTurn(board, curPlayPos, otherPlayPos, curPlayShots, curPlayHits):
 
 def aiTurn(board, playPos, aiShots, aiHits):
     x=0
-    bootDisplay()
+    bootDisplay(board)
     for i in range(0,x):
         point = random.randint(0,25)
         aiShot = board[point]
@@ -125,13 +125,23 @@ else:
 
 bootDisplay(board)
 if oneortwo == 1:
-    print("Player's Turn")
-    player2shippos, player1shots, player1hits = playerTurn(board, player1shippos, player2shippos, player1shots, player1hits)
-    bootDisplay()
-    print("AI's Turn")
-    player1shippos, player2shots, player2hits = aiTurn(board, player1shippos, player2shots, player2hits)
+    while player1shippos == True and player2shippos == True:
+        print("Player's Turn")
+        player2shippos, player1shots, player1hits = playerTurn(board, player1shippos, player2shippos, player1shots, player1hits)
+        bootDisplay(board)
+        print("AI's Turn")
+        player1shippos, player2shots, player2hits = aiTurn(board, player1shippos, player2shots, player2hits)
+    if player1shippos == False:
+        print("The AI is the winner!! Better luck next time")
+    elif player2shippos == False:
+        print("You are the winner!! Well done!")
 else:
-    print("Player 1's Turn")
-    player2shippos, player1shots, player1hits = playerTurn(board, player1shippos, player2shippos, player1shots, player1hits)
-    print("Player 2's Turn")
-    player1shippos, player2shots, player2hits = playerTurn(board, player2shippos, player1shippos, player2shots, player2hits)
+    while player1shippos == True and player2shippos == True:
+        print("Player 1's Turn")
+        player2shippos, player1shots, player1hits = playerTurn(board, player1shippos, player2shippos, player1shots, player1hits)
+        print("Player 2's Turn")
+        player1shippos, player2shots, player2hits = playerTurn(board, player2shippos, player1shippos, player2shots, player2hits)
+    if player1shippos == False:
+        print("Player 2 is the winner!! Well done!")
+    elif player2shippos == False:
+        print("Player 2 is the winner!! Well done!")
